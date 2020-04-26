@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+
+int main()
+{
+   int N;
+   scanf("%d", &N);
+   
+   int tableau[N][N];
+   int somme =  ((1+N*N)/2)*N;
+   int sommeLigne = 0, sommeColonne = 0;
+   int tableauN[20*20+1]= {0};  
+   bool estMagique = true;
+   
+   for (int ligne = 0; ligne < N; ligne++) //chargement + test ligne
+   {
+      sommeLigne = 0;
+      for (int colonne = 0; colonne < N; colonne++)
+      {
+         scanf("%d", &tableau[ligne][colonne]);
+         sommeLigne += tableau[ligne][colonne];
+         tableauN[tableau[ligne][colonne]]++; 
+         if (tableauN[tableau[ligne][colonne]]!=1)
+         {
+             estMagique = false;
+             break;     
+         }
+      }
+      if (somme != sommeLigne)
+      {
+         estMagique = false;
+         break;
+      }
+   }
+   
+   for (int colonne = 0; colonne < N; colonne++) //Test colonne
+   {
+      sommeColonne = 0;
+      for (int ligne = 0; ligne < N; ligne++)
+      {
+         sommeColonne += tableau[ligne][colonne];
+      }
+      if (somme != sommeColonne)
+      {
+         estMagique = false;
+         break;
+      }
+   }  
+   
+   int sommeDiag1 = 0, sommeDiag2 = 0; 
+         
+   for (int x = 0; x < N; x++) // Test diagonale descendante
+   {
+      sommeDiag1 += tableau[x][x];
+   }
+   if (somme != sommeDiag1)
+      {
+         estMagique = false;
+      }  
+   for (int x = N-1; x >= 0; x--) // Test diagonale montante
+   {
+      sommeDiag2 += tableau[x][x];
+   }
+   if (somme != sommeDiag2)
+      {
+         estMagique = false;
+      } 
+
+   if (estMagique)
+      printf("yes\n");
+   else
+      printf("no\n");
+      
+}
