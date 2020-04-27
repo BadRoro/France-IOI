@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+
+int main()
+{
+   int nbLignes, nbColonnes;
+   scanf("%d %d", &nbLignes, &nbColonnes);
+   int nbRectangles;
+   scanf("%d", &nbRectangles);
+   
+   char tableau[nbLignes][nbColonnes][1];
+   for (int y = 0; y < nbLignes; y++)
+   {
+     for (int x = 0; x < nbColonnes; x++)
+     {
+        tableau[y][x][0] = '.';
+     }
+   }
+   
+   for (int i = 0; i < nbRectangles; i++)
+   {
+     int iLig1, iCol1, iLig2, iCol2;
+     char car;
+     scanf("%d %d %d %d %c", &iLig1, &iCol1, &iLig2, &iCol2, &car);
+     for (int y = iLig1; y <= iLig2; y++)
+     {
+        for (int x = iCol1; x <= iCol2; x++)
+        {
+           tableau[y][x][0] = car;
+        }
+     }
+   }
+  for (int y = 0; y < nbLignes; y++)
+  {
+     for (int x = 0; x < nbColonnes; x++)
+     {
+        printf("%c", tableau[y][x][0]);
+     }
+     printf("\n");
+  }
+   
+}
